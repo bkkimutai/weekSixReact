@@ -11,17 +11,7 @@ app.use(express.json()) //Body parser
 
 app.use("/api/product", productRoutes);
 //app.use("/api/user",userRoutes);
-
-
 app.use(cors());
-
-app.use((req, res, next) => {
-   // Replace '*' with the specific origin of your frontend (http://localhost:3000)
-   res.header('Access-Control-Allow-Origin', '*');
-   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-   next();
- });
-
 // add middleware & static files
 
 let db = getDatabase();
