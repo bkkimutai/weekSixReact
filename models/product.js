@@ -7,7 +7,6 @@ let productSchema = new Schema({
     description: { type: String, required: true },
     price: { type: Number, required: true },
     quantity: { type: Number, required: true },
-    id: { type: Number },
     photo: {
       type: String,
       default:

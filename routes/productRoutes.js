@@ -37,7 +37,7 @@ router.post('/add', async (req, res) => {
 // Update a product by its ID
 router.put('/products/:id', async (req, res) => {
     try {
-      const productId = req.params.id;
+      const productId = req.params._id;
       const updatedProductData = req.body;
       // Find the product by its ID
       const product = await Product.findById(productId);
@@ -50,7 +50,6 @@ router.put('/products/:id', async (req, res) => {
       product.description = updatedProductData.description;
       product.price = updatedProductData.price;
       product.quantity = updatedProductData.quantity;
-      product.id = updatedProductData.id;
       product.photo = updatedProductData.photo;
   
       // Save the updated product to the database
@@ -67,7 +66,7 @@ router.put('/products/:id', async (req, res) => {
 // Delete a product by its ID (Soft Delete)
 router.delete('/products/:id', async (req, res) => {
     try {
-      const productId = req.params.id;
+      const productId = req.params._id;
   
       // Find the product by its ID
       const product = await Product.findById(productId);
