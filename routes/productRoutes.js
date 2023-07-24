@@ -50,6 +50,7 @@ router.put('/products/:id', async (req, res) => {
       product.description = updatedProductData.description;
       product.price = updatedProductData.price;
       product.quantity = updatedProductData.quantity;
+      product.id = updatedProductData.id;
       product.photo = updatedProductData.photo;
   
       // Save the updated product to the database
