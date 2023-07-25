@@ -22,7 +22,7 @@ router.post('/addproduct', async (req, res) => {
       // Check for duplicate data before saving
       const existingProduct = await Product.findOne({ name: newProductData.name });
       if (existingProduct) {
-        return res.status(400).json({ message: 'Product with this name already exists' });
+        return res.status(400).json({ message: 'Product with this name already exists' +newProductData.id});
       }
       const newProduct = new Product(newProductData);
       const savedProduct = await newProduct.save();
@@ -52,6 +52,7 @@ router.put('/updateproduct/:id', async (req, res) => {
       product.quantity = updatedProductData.quantity;
       product.id = updatedProductData.id;
       product.photo = updatedProductData.photo;
+      product.deleted = updatedProductData.deleted
   
       // Save the updated product to the database
       await product.save();
