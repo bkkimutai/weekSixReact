@@ -48,8 +48,8 @@ router.put('/updateproduct/:id', async (req, res) => {
       // Update the product fields with the new data
       product.name = updatedProductData.name;
       product.description = updatedProductData.description;
-      product.price = parseInt(updatedProductData.price);
-      product.quantity = parseInt(updatedProductData.quantity);
+      product.price = Number(updatedProductData.price);
+      product.quantity = Number(updatedProductData.quantity);
       product.photo = updatedProductData.photo;
       product.deleted = updatedProductData.deleted;
 
