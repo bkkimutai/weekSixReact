@@ -4,7 +4,7 @@ const Product = require('../models/product'); // Product Model
 
 
 // Fetch all products
-router.get('/products', async (req, res) => {
+router.get('/productlist', async (req, res) => {
     try {
       const products = await Product.find({deleted: false});
   
@@ -15,7 +15,7 @@ router.get('/products', async (req, res) => {
     }
   });
   
-router.post('/add', async (req, res) => {
+router.post('/addproduct', async (req, res) => {
     try {
       const newProductData = req.body;
   
@@ -35,7 +35,7 @@ router.post('/add', async (req, res) => {
   });
   
 // Update a product by its ID
-router.put('/products/:id', async (req, res) => {
+router.put('/updateproduct/:id', async (req, res) => {
     try {
       const productId = req.params.id;
       const updatedProductData = req.body;
@@ -65,7 +65,7 @@ router.put('/products/:id', async (req, res) => {
   
 // @route DELETE api/product/products/:id
 // Delete a product by its ID (Soft Delete)
-router.delete('/products/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     try {
       const productId = req.params.id;
   

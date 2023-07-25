@@ -6,7 +6,7 @@ const app = express()
 app.use(cors());
 // add middleware & static files
 app.use(express.json()) //Body parser
-app.use("/api/product", productRoutes);
+app.use("/api", productRoutes);
 //app.use("/api/user",userRoutes);
 
 let db = getDatabase();
