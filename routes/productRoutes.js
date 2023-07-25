@@ -36,33 +36,34 @@ router.post('/addproduct', async (req, res) => {
   
 // Update a product by its ID
 router.put('/updateproduct/:id', async (req, res) => {
-    try {
-      const productId = req.params.id;
-      const updatedProductData = req.body;
-      // Find the product by its ID
-      const product = await Product.findById(productId);
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found' });
-      }else{
-  
+  try {
+    const productId = req.params.id;
+    const updatedProductData = req.body;
+
+    // Find the product by its ID
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    } else {
       // Update the product fields with the new data
       product.name = updatedProductData.name;
       product.description = updatedProductData.description;
       product.price = updatedProductData.price;
       product.quantity = updatedProductData.quantity;
       product.photo = updatedProductData.photo;
-      product.deleted = updatedProductData.deleted
-      }
-  
+      product.deleted = updatedProductData.deleted;
+
       // Save the updated product to the database
       await product.save();
-  
+
       res.json(product);
-    } catch (error) {
-      console.error('Error updating product:', error);
-      res.status(500).json({ message: 'Server error' });
     }
-  });
+  } catch (error) {
+    console.error('Error updating product:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
   
 // @route DELETE api/product/products/:id
 // Delete a product by its ID (Soft Delete)
