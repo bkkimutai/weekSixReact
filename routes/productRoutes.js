@@ -43,16 +43,16 @@ router.put('/updateproduct/:id', async (req, res) => {
       const product = await Product.findById(productId);
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
-      }
+      }else{
   
       // Update the product fields with the new data
       product.name = updatedProductData.name;
       product.description = updatedProductData.description;
       product.price = updatedProductData.price;
       product.quantity = updatedProductData.quantity;
-      product.id = updatedProductData.id;
       product.photo = updatedProductData.photo;
       product.deleted = updatedProductData.deleted
+      }
   
       // Save the updated product to the database
       await product.save();
