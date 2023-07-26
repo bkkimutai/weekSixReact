@@ -37,7 +37,7 @@ router.post('/addproduct', async (req, res) => {
 // Update a product by its ID
 router.put('/updateproduct/:id', async (req, res) => {
   try {
-    const productId = req.body.id;
+    const productId = req.params.id;
     const updatedProductData = req.body;
 
     // Find the product by its ID
@@ -58,6 +58,7 @@ router.put('/updateproduct/:id', async (req, res) => {
 
       res.json(product);
       console.log(product);
+      console.log(updatedProductData);
     }
   } catch (error) {
     console.error('Error updating product:', error);
