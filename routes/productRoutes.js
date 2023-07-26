@@ -57,6 +57,7 @@ router.put('/updateproduct/:id', async (req, res) => {
       await product.save();
 
       res.json(product);
+      console.log(product);
     }
   } catch (error) {
     console.error('Error updating product:', error);
