@@ -40,6 +40,9 @@ router.put('/updateproduct/:id', async (req, res) => {
     const productId = req.params.id;
     const updatedProductData = req.body;
 
+    console.log(productId);
+    console.log(updatedProductData);
+
     // Find the product by its ID
     const product = await Product.findById(productId);
     if (!product) {
@@ -58,11 +61,11 @@ router.put('/updateproduct/:id', async (req, res) => {
 
       res.json(product);
       console.log(product);
-      console.log(updatedProductData);
     }
   } catch (error) {
     console.error('Error updating product:', error);
     res.status(500).json({ message: 'Server error' });
+    console.log(error);
   }
 });
 
