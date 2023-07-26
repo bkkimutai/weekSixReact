@@ -37,7 +37,7 @@ router.post('/addproduct', async (req, res) => {
 // Update a product by its ID
 router.put('/updateproduct/:id', async (req, res) => {
   try {
-    const productId = req.params.id;
+    const productId = req.body.id;
     const updatedProductData = req.body;
 
     // Find the product by its ID
