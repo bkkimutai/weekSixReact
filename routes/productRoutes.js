@@ -73,27 +73,25 @@ router.put('/updateproduct/:id', async (req, res) => {
 // @route DELETE api/product/products/:id
 // Delete a product by its ID (Soft Delete)
 router.delete('/delete/:id', async (req, res) => {
-    try {
-      const productId = req.params.id;
-  
-      // Find the product by its ID
-      const product = await Product.findById(productId);
-  
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found' });
-      }
-  
-      // Set the 'deleted' flag to true
-      product.deleted = true;
-  
-      // Save the updated product to the database
-      await product.save();
-  
-      res.json({ message: 'Product soft-deleted successfully' });
-    } catch (error) {
-      console.error('Error soft-deleting product:', error);
-      res.status(500).json({ message: 'Server error' });
+  try {
+    const productId = req.params.id;
+
+    // Find the product by its ID
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
     }
-  });
+
+    // Perform the hard delete by removing the product from the database
+    await Product.deleteOne({ _id: productId });
+
+    res.json({ message: 'Product hard-deleted successfully' });
+  } catch (error) {
+    console.error('Error hard-deleting product:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
   
 module.exports = router;
