@@ -1,13 +1,14 @@
 const express = require('express');
 const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/userRoutes');
 const getDatabase = require('./config/database');
 const cors = require('cors');
 const app = express()
 app.use(cors());
 // add middleware & static files
 app.use(express.json()) //Body parser
-app.use("/api", productRoutes);
-//app.use("/api/user",userRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 let db = getDatabase();
 const PORT = process.env.PORT || 5000        // Define the PORT
