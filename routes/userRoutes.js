@@ -29,6 +29,10 @@ router.post("/register", async (req, res) => {
                 data: null
             });
         }
+            // Hash the password before saving
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(newUser.password, saltRounds);
+            newUser.password = hashedPassword;
 
         // Save the new user to the database
         await newUser.save();
