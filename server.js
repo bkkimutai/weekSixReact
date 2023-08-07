@@ -21,7 +21,7 @@ app.use(
        secure: true,
        maxAge: 86400000,
      },
-     store: MongoStore.create({ mongooseConnection: db }), // Use connect-mongo as the session store
+     store: new MongoStore({ mongooseConnection: db }), // Use connect-mongo as the session store
    })
  );
 // add middleware & static files
