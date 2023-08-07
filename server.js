@@ -12,7 +12,7 @@ app.use(cors());
 
 let db = getDatabase();
 const secretKey = crypto.randomBytes(64).toString('hex');
-const sessionStore = new MongoStore({ mongooseConnection: db });
+const sessionStore = MongoStore.create({ mongooseConnection: db });
 app.use(
    session({
      secret: secretKey,
