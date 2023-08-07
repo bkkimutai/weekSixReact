@@ -14,7 +14,7 @@ app.use(
      resave: false,
      saveUninitialized: true,
      cookie: {
-       secure: false, // Set to true if using HTTPS
+       secure: true, // Set to true if using HTTPS
        maxAge: 86400000, // Set the session timeout in milliseconds (e.g., 24 hours)
      },
    })
