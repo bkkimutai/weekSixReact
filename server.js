@@ -5,18 +5,22 @@ const userRoutes = require('./routes/userRoutes');
 const getDatabase = require('./config/database');
 const crypto = require('crypto');
 const cors = require('cors');
+
+const MongoStore = require('connect-mongo')(session); // Import connect-mongo for session store
 const app = express()
 app.use(cors());
+let db = getDatabase();
 const secretKey = crypto.randomBytes(64).toString('hex');
 app.use(
    session({
-     secret: secretKey, // Replace with your secret key
+     secret: secretKey,
      resave: false,
      saveUninitialized: true,
      cookie: {
-       secure: true, // Set to true if using HTTPS
-       maxAge: 86400000, // Set the session timeout in milliseconds (e.g., 24 hours)
+       secure: true,
+       maxAge: 86400000,
      },
+     store: new MongoStore({ mongooseConnection: db }), // Use connect-mongo as the session store
    })
  );
 // add middleware & static files
@@ -24,7 +28,7 @@ app.use(express.json()) //Body parser
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 
-let db = getDatabase();
+
 const PORT = process.env.PORT || 5000        // Define the PORT
 
 //listen to requests
