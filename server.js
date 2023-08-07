@@ -5,12 +5,14 @@ const userRoutes = require('./routes/userRoutes');
 const getDatabase = require('./config/database');
 const crypto = require('crypto');
 const cors = require('cors');
+const MongoStore = require('connect-mongo')(session);
 
 const app = express()
 app.use(cors());
 
 let db = getDatabase();
 const secretKey = crypto.randomBytes(64).toString('hex');
+const sessionStore = new MongoStore({ mongooseConnection: db });
 app.use(
    session({
      secret: secretKey,
@@ -20,7 +22,7 @@ app.use(
        secure: true,
        maxAge: 86400000,
      },
-     store: new (require('connect-mongo')(session))({ mongooseConnection: db }), // Use connect-mongo as the session store
+     store: sessionStore,
    })
  );
 // add middleware & static files
