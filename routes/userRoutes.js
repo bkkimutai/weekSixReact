@@ -71,12 +71,16 @@ router.post("/login", async (req, res) => {
                 username: user.username,
                 // Add any other user data you want to include here, excluding the password
             };
+            const token = jwt.sign(userData, 'your-secret-key');
 
             res.json({
                 statusCode: 200,
                 successMessage: "Login success",
                 errorMessage: null,
-                data: userData
+                data: {
+                    user: userData,
+                    token: token 
+                }
             });
         } else {
             // Incorrect password
